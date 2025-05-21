@@ -1,32 +1,33 @@
 const sounds = ["applause", "boo", "gasp", "tada", "victory", "wrong"];
 const audioMap = {};
 
-sounds.forEach(sound => {
-  const audio = document.createElement("audio");
-  audio.src = `./sounds/${sound}.mp3`;
-  audio.id = sound;
-  document.body.appendChild(audio);
-  audioMap[sound] = audio;
-});
+sounds.forEach((item)=>{
+	let doc=document.createElement("audio");
+	doc.src=`./sounds/${item}.mp3`;
+	doc.id=item;
+	document.body.appendChild(doc);
+	audioMap[item]=doc;
+	
+})
 
-function playSound(soundName) {
-  stopAllSounds();
-  audioMap[soundName].play();
+function playSound(soundName){
+	stopAllSound();
+	audioMap[soundName].play();
 }
 
-function stopAllSounds() {
-  for (let sound in audioMap) {
-    audioMap[sound].pause();
-    audioMap[sound].currentTime = 0;
-  }
+function stopAllSound() {
+	for(let song in audioMap){
+		audioMap[song].pause();
+		audioMap[song].currentTime=0;
+	}
 }
 
-document.querySelectorAll(".btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    playSound(btn.textContent);
-  });
+document.querySelectorAll(".btn").forEach((btn)=>{
+	btn.addEventListener("click",()=>{
+		playSound(btn.textContent);
+	});
 });
 
-document.querySelector(".stop").addEventListener("click", () => {
-  stopAllSounds();
-});
+document.querySelector(".stop").addEventListener("click",()=>{
+		stopAllSound();
+	})
