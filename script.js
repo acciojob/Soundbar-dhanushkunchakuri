@@ -1,36 +1,32 @@
-// your JS code here. If required.
 const sounds = ["applause", "boo", "gasp", "tada", "victory", "wrong"];
+const audioMap = {};
 
-let obj = {};
-
-// Load audio files into the object
-sounds.forEach((item) => {
-  let audio = new Audio(`./sounds/${item}.mp3`);
-  obj[item] = audio;
+sounds.forEach(sound => {
+  const audio = document.createElement("audio");
+  audio.src = `./sounds/${sound}.mp3`;
+  audio.id = sound;
+  document.body.appendChild(audio);
+  audioMap[sound] = audio;
 });
 
-// Function to play selected sound
 function playSound(soundName) {
   stopAllSounds();
-  obj[soundName].play();
+  audioMap[soundName].play();
 }
 
-// Function to stop all sounds
 function stopAllSounds() {
-  for (let sound in obj) {
-    obj[sound].pause();
-    obj[sound].currentTime = 0;
+  for (let sound in audioMap) {
+    audioMap[sound].pause();
+    audioMap[sound].currentTime = 0;
   }
 }
 
-// Add click event listeners to sound buttons
-document.querySelectorAll(".btn").forEach((btn) => {
+document.querySelectorAll(".btn").forEach(btn => {
   btn.addEventListener("click", () => {
     playSound(btn.textContent);
   });
 });
 
-// Stop button
 document.querySelector(".stop").addEventListener("click", () => {
   stopAllSounds();
 });
